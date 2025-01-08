@@ -1,0 +1,58 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.util.List;
+
+public class NIOReadFileExample {
+    public static void main(String[] args) {
+        // Specify the path to the text 
+        String fileName = "myFiles.txt"; // Update the file path accordingly
+        
+        // Create a path project
+        Path path = Paths.get(fileName);
+        
+        try {
+            // Read all lines from the file into a list of strings
+            List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            
+            // Print each line to the control
+            for (String line : allLines) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            // Handle the exception if there is an issue reading the file
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+    }
+}
+
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.io.IOException;
+
+public class NIOFileExample {
+    public static void main(String[] args) {
+        // Specify the path to the text file
+        String fileName = "output.txt"; // You may specify the path where you want to create 
+        
+        // Create a path object
+        Path path = Paths.get(fileName);
+        
+        // Content to write to the file 
+        String content = "Hello, world! This is a sample text written using a Java NIO. \n";
+        
+        try {
+            // Write the content to the file, creating the file if it doesn't exist
+            Files.write(path, content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+            System.out.println("File written successfully!");
+        } catch (IOException e) {
+            // Handle the exception if there is an issue writing to the file 
+            System.err.println("Error writing to the file: " + e.getMessage());
+        }
+    }
+}
